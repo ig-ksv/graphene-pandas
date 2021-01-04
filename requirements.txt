@@ -1,0 +1,6 @@
+graphene>=2.0
+pandas
+SQLAlchemy
+graphene_sqlalchemy
+numpy
+pytest
