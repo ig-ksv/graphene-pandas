@@ -26,6 +26,7 @@ df = pd.DataFrame(test_data)
 class Query(DataFrameObjectType):
     class Meta:
         model = df
+        exclude_fields = ()
 
 
 schema = graphene.Schema(query=Query)
