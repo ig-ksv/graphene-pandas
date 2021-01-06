@@ -6,7 +6,7 @@ from collections import OrderedDict
 from graphene.types.objecttype import ObjectType, ObjectTypeOptions
 from graphene.types.utils import yank_fields_from_attrs
 
-from resolvers import get_attr_resolver, get_custom_resolver
+from resolvers import get_attr_resolver, get_custom_resolver, get_default_id_resolver
 
 
 def convert_field_type(column_type):
@@ -26,18 +26,20 @@ def convert_field_type(column_type):
     return field_type
 
 
-def construct_fields(obj_type, model):
+def construct_fields(obj_type, model, exclude_fields=()):
     fields = OrderedDict()
 
-    field_id_type = convert_field_type(model.index.dtype)
-    fields["id"] = graphene.Field(resolver=lambda root, info: model.index.values,
-                                  type=field_id_type,
-                                  description="default id(DataFrame Index)",
-                                  required=None)
+    raw_fields = {column_name: column_type
+                  for column_name, column_type
+                  in model.dtypes.items()
+                  if column_name not in exclude_fields}
+    raw_fields["id"] = model.index.dtype
 
-    for column_name, column_type in model.dtypes.items():
+    for column_name, column_type in raw_fields.items():
         field_description = f"Here must be description of a field"
         field_resolver = get_custom_resolver(obj_type, column_name) or get_attr_resolver(model)
+        if column_name == "id":
+            field_resolver = get_default_id_resolver(model)
         field_type = convert_field_type(column_type)
 
         fields[column_name] = graphene.Field(resolver=field_resolver,
@@ -75,6 +77,7 @@ class DataFrameObjectType(ObjectType):
             construct_fields(
                 obj_type=cls,
                 model=model,
+                exclude_fields=exclude_fields,
             ),
             _as=graphene.Field,
             sort=False,

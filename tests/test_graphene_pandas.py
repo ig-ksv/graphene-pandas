@@ -8,10 +8,11 @@ from dataframe_types import DataFrameObjectType
 
 
 class TestBasicQueries:
-    def _pre_setup(self, df: pd.DataFrame):
+    def _pre_setup(self, df: pd.DataFrame, ex_fields=()):
         class DataFrameQuery(DataFrameObjectType):
             class Meta:
                 model = df
+                exclude_fields = ex_fields
 
         self.schema = Schema(query=DataFrameQuery)
 
@@ -107,4 +108,21 @@ class TestBasicQueries:
         result = self.schema.execute(query)
         assert result.data["Dates"] == ["2012-05-11", "2005-02-05"]
         assert result.data["DateTimes"] == ["2012-05-11T10:10:00", "2005-02-05T12:30:00"]
+
+    def test_exclude_fields(self):
+        test_data = {"Brand": ["Honda Civic", "Toyota Corolla", "Ford Focus", "Audi A4"],
+                     "Price": [22000, 25000, 27000, 35000]}
+
+        test_df = pd.DataFrame(test_data)
+        self._pre_setup(test_df, ex_fields=("Price",))
+
+        query = """
+            query GrapheneDataFrame {
+              Brand
+              Price
+            }
+        """
+        result = self.schema.execute(query)
+        assert result.errors[0].message == 'Cannot query field "Price" on type "DataFrameQuery".'
+
 
