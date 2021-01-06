@@ -6,7 +6,7 @@ from collections import OrderedDict
 from graphene.types.objecttype import ObjectType, ObjectTypeOptions
 from graphene.types.utils import yank_fields_from_attrs
 
-from resolvers import get_attr_resolver, get_custom_resolver, get_default_id_resolver
+from .resolvers import get_attr_resolver, get_custom_resolver, get_default_id_resolver
 
 
 def convert_field_type(column_type):

@@ -1,10 +1,9 @@
-import pytest
 import pandas as pd
 import numpy as np
 
 from graphene import Schema
 
-from dataframe_types import DataFrameObjectType
+from graphene_pandas import DataFrameObjectType
 
 
 class TestBasicQueries:
