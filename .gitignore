@@ -5,3 +5,6 @@ venv/
 /db/
 /test_db/
 log.txt
+/build/
+/dist/
+/graphene_pandas.egg-info/

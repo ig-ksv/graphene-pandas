@@ -1,6 +1,4 @@
-graphene>=2.0
-pandas
-SQLAlchemy
-graphene_sqlalchemy
-numpy
-pytest
+graphene==2.1.8
+numpy==1.19.5
+pandas==1.2.0
+pytest==6.2.1
