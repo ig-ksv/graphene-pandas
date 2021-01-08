@@ -1,11 +1,12 @@
-# graphene-pandas(under developing)
+class Then(object):
+pass# graphene-pandas(under developing)
 
 ## Installation
 
 For instaling graphene-pandas, just run this command in your shell
 
 ```bash
-not ready 
+pip3 install graphene-pandas
 ```
 
 ## Examples
@@ -13,9 +14,9 @@ not ready
 To create a GraphQL schema for it you simply have to write the following:
 
 ```python
-import graphene
 import pandas as pd
 
+from graphene import Schema
 from graphene_pandas import DataFrameObjectType
 
 data = {"Brand": ["Honda Civic", "Toyota Corolla", "Ford Focus", "Audi A4"],
@@ -29,12 +30,10 @@ class Query(DataFrameObjectType):
         exclude_fields = ()
 
 
-schema = graphene.Schema(query=Query)
-```
+schema = Schema(query=Query)
 
-Then you can simply query the schema:
+#Then you can simply query the schema:
 
-```python
 query = '''
     query GrapheneDataFrame {
       Price
