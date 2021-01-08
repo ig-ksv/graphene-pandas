@@ -17,7 +17,6 @@ requirements = [
     "graphene == 2.1.8",
     "numpy == 1.19.5",
     "pandas == 1.2.0",
-    "pytest == 6.2.1"
 ]
 try:
     import enum
@@ -25,7 +24,7 @@ except ImportError:  # Python < 2.7 and Python 3.3
     requirements.append("enum34 >= 1.1.6")
 
 tests_require = [
-    "pytest==4.3.1",
+    "pytest==6.2.1",
     "mock==2.0.0",
     "pytest-cov==2.6.1",
     "pytest-benchmark==3.2.1",
