@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/ig-ksv/graphene-pandas.svg?branch=main)](https://travis-ci.com/ig-ksv/graphene-pandas)
+[![Build Status](https://travis-ci.com/ig-ksv/graphene-pandas.svg?branch=main)](https://travis-ci.com/ig-ksv/graphene-pandas) [![Coverage Status](https://coveralls.io/repos/github/ig-ksv/graphene-pandas/badge.svg?branch=main)](https://coveralls.io/github/ig-ksv/graphene-pandas?branch=main)
 
 # graphene-pandas(under developing)
 
