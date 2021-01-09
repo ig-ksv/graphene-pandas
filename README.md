@@ -1,5 +1,6 @@
-class Then(object):
-pass# graphene-pandas(under developing)
+[![Build Status](https://travis-ci.com/ig-ksv/graphene-pandas.svg?branch=main)](https://travis-ci.com/ig-ksv/graphene-pandas)
+
+# graphene-pandas(under developing)
 
 ## Installation
 
