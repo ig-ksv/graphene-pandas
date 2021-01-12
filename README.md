@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.com/ig-ksv/graphene-pandas.svg?branch=main)](https://travis-ci.com/ig-ksv/graphene-pandas) [![Coverage Status](https://coveralls.io/repos/github/ig-ksv/graphene-pandas/badge.svg?branch=main)](https://coveralls.io/github/ig-ksv/graphene-pandas?branch=main)
+[![Build Status](https://travis-ci.com/ig-ksv/graphene-pandas.svg?branch=main)](https://travis-ci.com/ig-ksv/graphene-pandas) [![Coverage Status](https://coveralls.io/repos/github/ig-ksv/graphene-pandas/badge.svg?branch=main)](https://coveralls.io/github/ig-ksv/graphene-pandas?branch=main) 
+[![PyPI version](https://badge.fury.io/py/graphene-pandas.svg)](https://badge.fury.io/py/graphene-pandas)
 
 # graphene-pandas(under developing)
 
