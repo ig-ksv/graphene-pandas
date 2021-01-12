@@ -12,12 +12,12 @@ pip3 install graphene-pandas(not implemented)
 
 ## Examples
 
-To create a GraphQL schema for it you simply have to write the following:
+To create a GraphQL schema for it, you simply have to write the following:
 
 ```python
 import pandas as pd
 
-from graphene import Schema
+import graphene
 from graphene_pandas import DataFrameObjectType
 
 data = {"Brand": ["Honda Civic", "Toyota Corolla", "Ford Focus", "Audi A4"],
@@ -25,22 +25,39 @@ data = {"Brand": ["Honda Civic", "Toyota Corolla", "Ford Focus", "Audi A4"],
 df = pd.DataFrame(data)
 
 
-class Query(DataFrameObjectType):
+class Records(DataFrameObjectType):
     class Meta:
         model = df
         exclude_fields = ()
 
 
-schema = Schema(query=Query)
+class Query(graphene.ObjectType):
+    record = graphene.Field(Records, brand=graphene.String(), index=graphene.Int())
+    records = graphene.List(Records, brand=graphene.String())
 
-#Then you can simply query the schema:
+    def resolve_record(self, info, index):
+        query = Records.get_row_int_index(info, index)
+        return query
 
-query = '''
-    query GrapheneDataFrame {
-      Price
-      Brand
-    }
-'''
-result = schema.execute(query)
+    def resolve_records(self, info):
+        query = Records.get_all_rows(info)
+        return query
+
+schema = graphene.Schema(query=Query)
+
+query = """
+            query Test {
+              record(index: 1) {
+                Brand
+                Price
+              }
+              records {
+                Brand
+                Price
+              }
+            }
+        """
+
+result = graphene.schema.execute(query)
 ```
 ```
