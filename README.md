@@ -32,8 +32,8 @@ class Records(DataFrameObjectType):
 
 
 class Query(graphene.ObjectType):
-    record = graphene.Field(Records, brand=graphene.String(), index=graphene.Int())
-    records = graphene.List(Records, brand=graphene.String())
+    record = graphene.Field(Records, index=graphene.Int())
+    records = graphene.List(Records)
 
     def resolve_record(self, info, index):
         query = Records.get_row_int_index(info, index)
