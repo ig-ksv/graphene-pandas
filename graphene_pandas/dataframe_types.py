@@ -6,7 +6,7 @@ from collections import OrderedDict
 from graphene.types.objecttype import ObjectType, ObjectTypeOptions
 from graphene.types.utils import yank_fields_from_attrs
 
-from .utils import replace_nan_values
+from .utils import replace_nan_values_list, replace_nan_values_dict
 
 
 def convert_field_type(column_type):
@@ -86,16 +86,16 @@ class DataFrameObjectType(ObjectType):
     def get_all_rows(cls, info):
         model = cls._meta.model
         model_dict = model.to_dict(orient="records")
-        return replace_nan_values(model_dict)
+        return replace_nan_values_list(model_dict)
 
     @classmethod
     def get_row_int_index(cls, info, index):
         model = cls._meta.model
         model_dict = model.iloc[[index]].to_dict(orient="records")[0]
-        return replace_nan_values(model_dict)
+        return replace_nan_values_dict(model_dict)
 
     @classmethod
     def get_row_by_label_index(cls, info, index):
         model = cls._meta.model
         model_dict = model.loc[[index]].to_dict(orient="records")[0]
-        return replace_nan_values(model_dict)
+        return replace_nan_values_dict(model_dict)
