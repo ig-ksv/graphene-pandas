@@ -8,7 +8,7 @@
 For instaling graphene-pandas, just run this command in your shell
 
 ```bash
-pip3 install graphene-pandas(not implemented)
+pip3 install graphene-pandas
 ```
 
 ## Examples
